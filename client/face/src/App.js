@@ -124,7 +124,12 @@ export default function App() {
         document.getElementById('score3-details').appendChild(distanceBetweenEyesElement);
 
         // score 3
-        const score3 = eyeWidth / distanceBetweenEyes * 10;
+        let score3;
+        if (eyeWidth < distanceBetweenEyes) {
+          score3 = eyeWidth / distanceBetweenEyes * 10;
+        } else {
+          score3 = distanceBetweenEyes / eyeWidth * 10;
+        }
         document.getElementById('score3').innerHTML = score3;
 
         // total score out of 10. average of score 1 + score 2 + score 3 

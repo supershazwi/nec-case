@@ -131,10 +131,11 @@ export default function App() {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
     setDisplayImage(URL.createObjectURL(event.target.files[0]));
+    
     document.getElementById('stat-details').style.display = 'none';
-    // const canvas = document.getElementById('canvas');
-    // const context = canvas.getContext('2d');
-    // context.clearRect(0, 0, canvas.width, canvas.height);
+    if (document.getElementById('canvas')) {
+      document.getElementById('canvas').remove();
+    }
   };
 
   return (

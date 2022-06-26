@@ -3,13 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import * as faceapi from 'face-api.js';
+import { SpinnerRound } from 'spinners-react';
+
 
 export default function App() {
   const [selectedFile, setSelectedFile] = useState();
   const [displayImage, setDisplayImage] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    // set loading to true
+    setLoading(true);
 
     const image = await faceapi.bufferToImage(selectedFile);
     
@@ -19,6 +25,9 @@ export default function App() {
       faceapi.nets.faceLandmark68Net.loadFromUri('/weights'),
       faceapi.nets.ssdMobilenetv1.loadFromUri('/weights')
     ]).then(async () => {
+      // hide loading spinner and show stat box
+      setLoading(false);
+
       // create a container to house the image that we have uploaded
       const container = document.createElement('div');
       container.style.position = 'relative';
@@ -148,8 +157,7 @@ export default function App() {
           <p className="mt-2 text-center text-sm text-gray-600">
             Upload a face portrait and determine a beauty score.
           </p>
-        </div>
-        
+        </div> 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <input type="file" name="file" id="upload" onChange={handleFileChange} />
@@ -165,6 +173,11 @@ export default function App() {
         </div>
       </form>
     </div>
+
+    <div className="min-h-full flex flex-col justify-center sm:px-6 lg:px-8 items-center">
+      <SpinnerRound size={65} thickness={100} speed={100} color="rgba(219, 39, 119, 1)" secondaryColor="rgba(0, 0, 0, 0.44)" enabled={loading} />
+    </div>
+  
     <div className="min-h-full flex flex-col justify-center sm:px-6 lg:px-8 hidden" id="stat-details">
       <div className="min-h-full flex flex-col justify-center py-4 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">

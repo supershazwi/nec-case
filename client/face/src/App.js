@@ -1,10 +1,7 @@
-import {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
-import axios from 'axios';
 import * as faceapi from 'face-api.js';
 import { SpinnerRound } from 'spinners-react';
-
 
 export default function App() {
   const [selectedFile, setSelectedFile] = useState();

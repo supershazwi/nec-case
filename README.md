@@ -2,6 +2,8 @@
 
 This app allows a user to upload an image of a person's face and determining a score (out of 10 with 10 being most beautiful) that indicates the person's beauty.
 
+![Demo App - Tom Cruise](https://i.imgur.com/7vKHVwT.png)
+
 ## Important Libraries Used
 
 1. [tailwindUI](https://tailwindui.com/)
